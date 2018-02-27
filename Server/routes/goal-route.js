@@ -4,7 +4,7 @@ module.exports = function(app) {
 
   // todoList Routes
   app.route('/:token')
-    .get(controller.find);
+    .get(controller.list_all);
 
   app.route('/')
     .post(controller.add)

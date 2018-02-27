@@ -8,7 +8,7 @@ const User = {
 };
 const Functions = require('../config/functions');
 
-exports.find = function(req, res){
+exports.list_all = function(req, res){
   User[res.locals.user.type].findOne({
     _id: res.locals.user._id
   }, 'data').then(user => {
