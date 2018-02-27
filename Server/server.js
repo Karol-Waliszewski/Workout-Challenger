@@ -50,6 +50,7 @@ const Routes = {
   elements: require('./routes/element-route'),
   user: require('./routes/user-route'),
   auth: require('./routes/authorization-route'),
+  challenges: require('./routes/challenge-route')
 }
 
 server.use('/tags', Routes.tags);
@@ -59,6 +60,7 @@ server.use('/exercises', Routes.exercises);
 server.use('/elements', Routes.elements);
 server.use('/auth', Routes.auth);
 server.use('/user', Routes.user);
+server.use('/challenge', Routes.challenges);
 
 server.get('/', (req, res) => {
   res.send('Welcome to Workout Partner Api!');
