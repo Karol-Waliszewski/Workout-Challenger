@@ -42,23 +42,17 @@ mongoose.connect(keys.mongoose.adress, () => {
 });
 
 // Routes
-
-var Routes = {
-    tags: require('./routes/tag-route'),
-    tasks: require('./routes/task-route'),
-    trainings: require('./routes/training-route'),
-    exercises: require('./routes/exercise-route'),
-    elements: require('./routes/element-route'),
-    user: require('./routes/user-route'),
-    auth: require('./routes/authorization-route'),
+const Routes = {
+  tags: require('./routes/tag-route'),
+  tasks: require('./routes/task-route'),
+  trainings: require('./routes/training-route'),
+  exercises: require('./routes/exercise-route'),
+  elements: require('./routes/element-route'),
+  user: require('./routes/user-route'),
+  auth: require('./routes/authorization-route'),
 }
 
-//send express as argument to route
-Routes.forEach = function(){
-    Routes(server);
-}
-
-server.use('/tags', Routes.tasks);
+server.use('/tags', Routes.tags);
 server.use('/tasks', Routes.tasks);
 server.use('/trainings', Routes.trainings);
 server.use('/exercises', Routes.exercises);
