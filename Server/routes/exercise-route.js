@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Exercise = require('../models/exercise-model');
+const Exercises = require('../models/exercise-model');
 //const Keys = require('../config/keys');
 const Functions = require('../config/functions');
 
 router.get('/get/:token', Functions.validateRequest, (req, res) => {
-  Exercise.find({
+  Exercises.find({
     $or: [{
       author: res.locals.user._id
     }, {
@@ -20,7 +20,7 @@ router.get('/get/:token', Functions.validateRequest, (req, res) => {
 
 router.post('/add', Functions.validateRequest, (req, res) => {
   // Creating a exercise object and filling in with required data
-  let freshExercise = new Exercise({
+  let freshExercise = new Exercises({
     author: res.locals.user._id,
     //author: 'default',
     name: req.body.name,
@@ -44,26 +44,28 @@ router.post('/add', Functions.validateRequest, (req, res) => {
     });
 });
 
-router.post('/update', Functions.validateRequest, (req, res) => {
-  if (req.body.exercise) {
-    Exercise.findOneAndUpdate({
-      _id: req.body.exercise._id,
-      author: res.locals.user._id
-    }, req.body.exercise, {
-      setDefaultsOnInsert: true
-    }, (err) => {
-      if (err)
-        Functions.errorRes(res, [err]);
-      else
-        Functions.successfulRes(res, 'Exercise has been updated');
+router.put('/update/:exerciseID', Functions.validateRequest, (req,res)=>{
+  if(req.body.exercise){
+      Exercises.findOneAndUpdate({
+        _id:req.params.exerciseID
+      }, req.body.exercise, function(err, exercise) {
+      if (err){
+         Functions.errorRes(res, [err]);
+      }
+      else{
+         Functions.successfulRes(res, 'Exercise\' saved', exercise);
+      }
     });
-  } else
-    Functions.unsuccessfulRes(res, 'You have to choose exercise');
+  }
+  else{
+        Functions.unsuccessfulRes(res, 'You have to choose exercise');
+  }
 });
+
 
 router.post('/delete', Functions.validateRequest, (req, res) => {
   if (req.body.exerciseID) {
-    Exercise.findOneAndRemove({
+    Exercises.findOneAndRemove({
       _id: req.body.exerciseID,
       author: res.locals.user._id
     }, (err) => {

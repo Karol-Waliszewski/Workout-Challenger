@@ -45,21 +45,22 @@ router.post('/add', Functions.validateRequest, (req, res) => {
     });
 });
 
-router.put('/update', Functions.validateRequest, (req, res) => {
-  if (req.body.element) {
-    Elements.findOneAndUpdate({
-      _id: req.body.element._id,
-      author: res.locals.user._id
-    }, req.body.element, {
-      setDefaultsOnInsert: true
-    }, (err) => {
-      if (err)
-        Functions.errorRes(res, [err]);
-      else
-        Functions.successfulRes(res, 'Element has been updated');
+router.put('/update/:elementID', Functions.validateRequest, (req,res)=>{
+  if(req.body.element){
+      Elements.findOneAndUpdate({
+        _id:req.params.elementID
+      }, req.body.element, function(err, exercise) {
+      if (err){
+         Functions.errorRes(res, [err]);
+      }
+      else{
+         Functions.successfulRes(res, 'Element\' saved', exercise);
+      }
     });
-  } else
-    Functions.unsuccessfulRes(res, 'You have to choose element');
+  }
+  else{
+        Functions.unsuccessfulRes(res, 'You have to choose element');
+  }
 });
 
 router.delete('/delete', Functions.validateRequest, (req, res) => {

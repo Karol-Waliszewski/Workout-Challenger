@@ -60,7 +60,7 @@ server.use('/exercises', Routes.exercises);
 server.use('/elements', Routes.elements);
 server.use('/auth', Routes.auth);
 server.use('/user', Routes.user);
-server.use('/challenge', Routes.challenges);
+server.use('/challenges', Routes.challenges);
 
 server.get('/', (req, res) => {
   res.send('Welcome to Workout Partner Api!');

@@ -36,15 +36,26 @@ router.post('/add', Functions.validateRequest, (req,res)=>{
       });
 });
 
-router.put('/update/:challengeId', Functions.validateRequest, (req,res)=>{
-    Challenges.findOneAndUpdate({_id:req.params.challengeId}, req.body, function(err, challenge) {
+router.put('/update/:id', Functions.validateRequest, (req,res)=>{
+    Challenges.findOneAndUpdate({_id:req.params.id}, req.body, function(err, challenge) {
     if (err){
        Functions.errorRes(res, [err]);
     }
     else{
-       Functions.successfulRes(res, 'Challenge\' saved', challenge);
+       Functions.successfulRes(res, 'Challenge\'s saved', challenge);
     }
   });
+});
+
+router.delete('/delete/:id', Functions.validateRequest, (req,res)=>{
+    Challenges.find({_id:req.params.id}).remove((err, challenge)=>{
+      if(err){
+        Functions.errorRes(res, [err]);
+      }
+      else{
+        Functions.successfulRes(res, 'Challenge\'s deleted');
+      }
+    });
 });
 
 //test
