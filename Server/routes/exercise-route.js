@@ -63,19 +63,16 @@ router.put('/update/:exerciseID', Functions.validateRequest, (req,res)=>{
 });
 
 
-router.post('/delete', Functions.validateRequest, (req, res) => {
-  if (req.body.exerciseID) {
-    Exercises.findOneAndRemove({
-      _id: req.body.exerciseID,
-      author: res.locals.user._id
-    }, (err) => {
-      if (err)
-        Functions.errorRes(res, [err]);
-      else
-        Functions.successfulRes(res, 'Exercise has been deleted');
+router.delete('/delete/:id', Functions.validateRequest, (req, res) => {
+    Exercises.find({_id:req.params.id}).remove((err)=>{
+        if(err){
+          Functions.errorRes(res, [err]);
+        }
+        else{
+          Functions.successfulRes(res, 'Exercise\'s deleted');
+        }
+      });
     });
-  } else
-    Functions.unsuccessfulRes(res, 'You have to choose exercise');
-});
+
 
 module.exports = router;

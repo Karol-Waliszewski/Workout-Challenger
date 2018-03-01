@@ -45,16 +45,16 @@ router.post('/add', Functions.validateRequest, (req, res) => {
     });
 });
 
-router.put('/update/:elementID', Functions.validateRequest, (req,res)=>{
+router.put('/update/:id', Functions.validateRequest, (req,res)=>{
   if(req.body.element){
       Elements.findOneAndUpdate({
-        _id:req.params.elementID
+        _id:req.params.id
       }, req.body.element, function(err, exercise) {
       if (err){
          Functions.errorRes(res, [err]);
       }
       else{
-         Functions.successfulRes(res, 'Element\' saved', exercise);
+         Functions.successfulRes(res, 'Element\'s saved', exercise);
       }
     });
   }
@@ -63,19 +63,16 @@ router.put('/update/:elementID', Functions.validateRequest, (req,res)=>{
   }
 });
 
-router.delete('/delete', Functions.validateRequest, (req, res) => {
-  if (req.body.elementID) {
-    Elements.findOneAndRemove({
-      _id: req.body.elementID,
-      author: res.locals.user._id
-    }, (err) => {
-      if (err)
-        Functions.errorRes(res, [err]);
-      else
-        Functions.successfulRes(res, 'Element has been deleted');
-    });
-  } else
-    Functions.unsuccessfulRes(res, 'You have to choose element');
+router.delete('/delete/:id', Functions.validateRequest, (req, res) => {
+    Elements.find({_id: req.params.id}).remove((err)=>{
+        if(err){
+            Functions.errorRes(res, [err]);
+        }
+        else{
+             Functions.successfulRes(res, 'Element\'s deleted');
+        }
+    })
 });
+
 
 module.exports = router;
