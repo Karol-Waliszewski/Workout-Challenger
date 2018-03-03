@@ -64,7 +64,10 @@ router.put('/update/:exerciseID', Functions.validateRequest, (req,res)=>{
 
 
 router.delete('/delete/:id', Functions.validateRequest, (req, res) => {
-    Exercises.find({_id:req.params.id}).remove((err)=>{
+    Exercises.find({
+      _id:req.params.id,
+      author: res.locals.user._id
+    }).remove((err)=>{
         if(err){
           Functions.errorRes(res, [err]);
         }

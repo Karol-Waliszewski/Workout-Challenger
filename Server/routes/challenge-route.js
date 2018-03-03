@@ -5,13 +5,8 @@ const Challenges = require('../models/challenge-model');
 const Functions = require('../config/functions');
 
 router.get('/get/:token', Functions.validateRequest, (req,res)=>{
-  Challenges.find({
-    $or: [{
-      author: res.locals.user._id
-    }, {
-      author: 'default'
-    }]
-  }).then(results => {
+  Challenges.find({author: res.locals.user._id}
+  ).then(results => {
     Functions.successfulRes(res, '', results);
   }).catch(err => {
     Functions.errorRes(res, [err]);
@@ -48,7 +43,10 @@ router.put('/update/:id', Functions.validateRequest, (req,res)=>{
 });
 
 router.delete('/delete/:id', Functions.validateRequest, (req,res)=>{
-    Challenges.find({_id:req.params.id}).remove((err, challenge)=>{
+    Challenges.find({
+      _id:req.params.id,
+      author: res.locals.user._id
+    }).remove((err, challenge)=>{
       if(err){
         Functions.errorRes(res, [err]);
       }
