@@ -1,0 +1,41 @@
+.sidebar {
+  z-index: 10;
+  height: 100vh;
+  overflow: auto;
+  background: white;
+  box-shadow: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.05);
+  @media screen and (max-width: 1024px) {
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    position: fixed;
+    top: 52px;
+    height: calc(100vh - 52px);
+    left: 0;
+    width: 70%;
+    transform: translateX(-105%);
+    transition: transform 300ms;
+
+    &.is-active {
+      transform: none;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    position: relative;
+    width: 15%;
+    padding-top: 4.5rem !important;
+  }
+}
+
+.sidebar .is-angle {
+  position: absolute;
+  right: 10px;
+  top: 18px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.sidebar .menu-label {
+  a {
+    color: inherit;
+  }
+}
