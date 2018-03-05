@@ -20,14 +20,15 @@ router.get('/get/:token', Functions.validateRequest, (req, res) => {
 });
 
 router.put('/update', Functions.validateRequest, (req, res) => {
+  //Check if user exist
+    User[res.locals.user.type].findOne({_id:res.locals.user._id}, (err)=>{
+    if(err){
+      Functions.unsuccessfulRes(res, 'User doesn\'t found');
+    }
+  });
 
   // Password Updating
   if (req.body.oldPassword && req.body.newPassword) {
-
-    // TODO disable updating same old and new
-    // TODO more validation (check if user has been fouund)
-
-    //TODO validation here
     req.checkBody('oldPassword', 'Enter old password').notEmpty();
     req.checkBody('newPassword', 'Password must be 6-16 chars long').isLength({
       min: 6,
