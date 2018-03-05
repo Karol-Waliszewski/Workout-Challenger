@@ -30,6 +30,7 @@ router.put('/update', Functions.validateRequest, (req, res) => {
   // Password Updating
   if (req.body.oldPassword && req.body.newPassword) {
     req.checkBody('oldPassword', 'Enter old password').notEmpty();
+    req.checkBody('newPassword', 'Enter new password').notEmpty();
     req.checkBody('newPassword', 'Password must be 6-16 chars long').isLength({
       min: 6,
       max: 16
