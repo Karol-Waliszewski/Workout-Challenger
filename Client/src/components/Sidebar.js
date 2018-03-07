@@ -20,7 +20,7 @@ class Sidebar extends Component {
             <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/exercises">Exercises</NavLink>
+            <NavLink to="/login">Login</NavLink>
             <span className="icon is-small is-angle">
               <span className="fas fa-angle-down"></span>
             </span>

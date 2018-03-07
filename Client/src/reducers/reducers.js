@@ -2,6 +2,7 @@ import {
   combineReducers
 } from 'redux' 
 import sidebarReducer from './sidebarReducer'
+import authReducer from './authReducer'
 
 function counter(state = 0, action) {
   if (!action.payload)
@@ -18,9 +19,9 @@ function counter(state = 0, action) {
   }
 }
 
-
 var reducers = combineReducers({
   counter,
-  sidebar: sidebarReducer
+  sidebar: sidebarReducer,
+  auth: authReducer
 });
 export default reducers;

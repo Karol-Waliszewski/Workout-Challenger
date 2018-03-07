@@ -347,6 +347,14 @@
   opacity: 0.01;
   transition: opacity 300ms ease-in; }
 
+.fade-enter {
+  opacity: 0;
+  z-index: 1; }
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in; }
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px; }
