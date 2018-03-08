@@ -10,12 +10,12 @@ export default function sidebarReducer(state = {
       break;
     case 'CLOSE_SIDEBAR':
       return { ...state,
-        sidebarActive: true
+        sidebarActive: false
       }
       break;
     case 'OPEN_SIDEBAR':
       return { ...state,
-        sidebarActive: false
+        sidebarActive: true
       }
       break;
     case 'DISABLE_SIDEBAR':

@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route} from "react-router-dom";
 import {connect} from 'react-redux';
 
-class SecuredRoute extends React.Component {
+class UnauthenticatedRoute extends React.Component {
   render() {
     let {props} = this;
     let routeProps = {
@@ -11,9 +11,9 @@ class SecuredRoute extends React.Component {
     }
     let Component = props.component
     return (<Route {...routeProps} render={() => (
-        props.isAuthenticated
+        !props.isAuthenticated
         ? (<Component/>)
-        : (<Redirect to="/login"/>)
+        : (<Redirect to="/"/>)
       )}/>)
   }
 }
@@ -22,6 +22,6 @@ function mapStateToProps(state) {
   return {isAuthenticated: state.auth.isAuthenticated};
 }
 
-var SecuredRouteContainer = connect(mapStateToProps)(SecuredRoute)
+var UnauthenticatedRouteContainer = connect(mapStateToProps)(UnauthenticatedRoute)
 
-export default SecuredRouteContainer;
+export default UnauthenticatedRouteContainer;

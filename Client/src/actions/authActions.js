@@ -44,3 +44,10 @@ export function AUTHENTICATE_PENDING() {
     type: 'AUTHENTICATE_PENDING'
   }
 }
+
+
+export function AUTHENTICATE_LOGOUT() {
+  return {
+    type: 'AUTHENTICATE_LOGOUT'
+  }
+}

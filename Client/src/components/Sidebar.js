@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {CLOSE_SIDEBAR} from '../actions/sidebarActions';
+import {AUTHENTICATE_LOGOUT} from '../actions/authActions';
 import {NavLink} from 'react-router-dom'
 
 class Sidebar extends Component {
@@ -11,30 +12,33 @@ class Sidebar extends Component {
       props
     } = this;
     if (props.sidebarEnabled)
-      return (<aside className={"menu sidebar is-p-2 is-p-t-3 " + (props.sidebarActive ? 'is-active' : '')}>
+      return (<aside className={"menu sidebar is-p-2 is-p-t-3 " + (
+          props.sidebarActive
+          ? 'is-active'
+          : '')}>
         <p className="menu-label">
           General
         </p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/" onClick={props.closeSidebar}>Home</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login" onClick={props.closeSidebar}>Login</NavLink>
             <span className="icon is-small is-angle">
               <span className="fas fa-angle-down"></span>
             </span>
             <ul>
               <li>
-                <NavLink to="/exercises">List of exercises</NavLink>
+                <NavLink to="/exercises" onClick={props.closeSidebar}>List of exercises</NavLink>
               </li>
               <li>
-                <NavLink to="/exercises/creator">Add new one</NavLink>
+                <NavLink to="/exercises/creator" onClick={props.closeSidebar}>Add new one</NavLink>
               </li>
             </ul>
           </li>
           <li>
-            <NavLink to="/trainings">Workouts</NavLink>
+            <NavLink to="/tester" onClick={props.closeSidebar}>Tester</NavLink>
           </li>
         </ul>
         <p className="menu-label">
@@ -42,13 +46,13 @@ class Sidebar extends Component {
         </p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/statistics">General</NavLink>
+            <NavLink to="/statistics" onClick={props.closeSidebar}>General</NavLink>
           </li>
           <li>
-            <NavLink to="/statistics/elements">Elements progress</NavLink>
+            <NavLink to="/statistics/elements" onClick={props.closeSidebar}>Elements progress</NavLink>
           </li>
           <li>
-            <NavLink to="/statistics/creator">Elements progress</NavLink>
+            <NavLink to="/statistics/creator" onClick={props.closeSidebar}>Elements progress</NavLink>
           </li>
         </ul>
         <p className="menu-label is-hidden-desktop">
@@ -56,17 +60,20 @@ class Sidebar extends Component {
         </p>
         <ul className="menu-list is-hidden-desktop">
           <li>
-            <NavLink to="/settings">Settings</NavLink>
+            <NavLink to="/settings" onClick={props.closeSidebar}>Settings</NavLink>
           </li>
           <li>
-            <a href="/logout">Logout</a>
+            <NavLink to="/login" onClick={() => {
+                props.logout();
+                props.closeSidebar()
+              }}>Logout</NavLink>
           </li>
         </ul>
       </aside>)
     else
       return (null)
-    }
   }
+}
 
 function mapStateToProps(state) {
   return {
@@ -76,7 +83,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    closeSidebar: CLOSE_SIDEBAR
+    closeSidebar: CLOSE_SIDEBAR,
+    logout: AUTHENTICATE_LOGOUT
   }, dispatch);
 }
 

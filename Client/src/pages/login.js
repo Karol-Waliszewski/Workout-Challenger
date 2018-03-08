@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {AUTHENTICATE_LOCAL} from '../actions/authActions';
-class Login extends Component {
 
+class Login extends Component {
   render() {
     let {props} = this;
-    return (<div className="App-intro">
-      <form className="section is-p-t-1">
+    return (<div className="App-intro section">
+      <form className="is-p-t-1">
         <div className="field">
           <label className="label">Login</label>
           <div className="control">
@@ -25,18 +25,18 @@ class Login extends Component {
           Login
         </button>
       </form>
-
       {
-        props.token && <p style={{
-              wordBreak: 'break-word'
-            }}>TOKEN: {props.token}</p>
+        props.error && <article class="message is-small is-danger is-m-t-2">
+            <div class="message-body">
+              {props.error}
+            </div>
+          </article>
       }
-
     </div>)
   }
 }
 function mapStateToProps(state) {
-  return {token: state.auth.token};
+  return {error: state.auth.error};
 }
 
 function mapDispatchToProps(dispatch) {

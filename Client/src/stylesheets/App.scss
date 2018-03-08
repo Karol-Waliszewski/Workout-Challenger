@@ -1,6 +1,14 @@
 @import './spacing';
 @import './sidebar';
 @import './transitions';
+@import "./footer";
+
+.App {
+  position: relative;
+  padding-bottom: 80px;
+  padding-top: 3.25rem;
+  min-height: 100vh;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -24,8 +32,12 @@
   margin-top: 0.5rem;
   text-align: center;
 }
-
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
