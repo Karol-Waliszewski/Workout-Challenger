@@ -26,8 +26,8 @@ class Login extends Component {
         </button>
       </form>
       {
-        props.error && <article class="message is-small is-danger is-m-t-2">
-            <div class="message-body">
+        props.error && <article className="message is-small is-danger is-m-t-2">
+            <div className="message-body">
               {props.error}
             </div>
           </article>

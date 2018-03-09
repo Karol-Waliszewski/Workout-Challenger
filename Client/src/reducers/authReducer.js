@@ -12,8 +12,6 @@ export default function authReducer(state = {
       }
       break;
     case 'AUTHENTICATE_SUCCESS':
-      if (!localStorage.getItem('AuthenticationToken'))
-        localStorage.setItem('AuthenticationToken', action.payload);
       return {
         isAuthenticated: true,
         pending: false,
@@ -30,7 +28,6 @@ export default function authReducer(state = {
       }
       break;
     case 'AUTHENTICATE_LOGOUT':
-      localStorage.removeItem('AuthenticationToken');
       return {
         isAuthenticated: false,
         pending: false,

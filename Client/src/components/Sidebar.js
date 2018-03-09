@@ -38,7 +38,7 @@ class Sidebar extends Component {
             </ul>
           </li>
           <li>
-            <NavLink to="/tester" onClick={props.closeSidebar}>Tester</NavLink>
+            <NavLink to="/secured" onClick={props.closeSidebar}>Secured</NavLink>
           </li>
         </ul>
         <p className="menu-label">

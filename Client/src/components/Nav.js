@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {TOGGLE_SIDEBAR} from '../actions/sidebarActions';
@@ -10,9 +10,9 @@ class Nav extends Component {
     let {props} = this;
     return (<nav className="navbar is-fixed-top">
       <div className="navbar-brand">
-        <a className="navbar-item" href="#">
+        <Link className="navbar-item" to="/">
           <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"/>
-        </a>
+        </Link>
         {props.sidebarEnabled && <button className={"button is-white navbar-burger " + (props.navbarActive ? 'is-active' : '')} onClick={()=>{props.toggleSidebar()}}>
           <span></span>
           <span></span>

@@ -1,3 +1,4 @@
+// Scripts
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
@@ -10,6 +11,7 @@ import {AUTHENTICATE_SUCCESS} from './actions/authActions'
 import './stylesheets/App.css'
 import 'bulma/css/bulma.css'
 
+// Checks if someone is already logged in, then dispatches information to store.
 if(localStorage.getItem('AuthenticationToken')){
   let token = localStorage.getItem('AuthenticationToken');
   Store.dispatch(AUTHENTICATE_SUCCESS(token));

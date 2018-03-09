@@ -1,45 +1,21 @@
-.example-enter {
-  opacity: 0.01;
-}
-
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
-// .sidebarSlide-enter {
-//   transform: translateX(-105%);
-// }
-//
-// .sidebarSlide-enter.sidebarSlide-enter-active {
-//   transform: translateX(0%);
-//   transition: transform 300ms;
-// }
-//
-// .sidebarSlide-leave {
-//   transform: translateX(-105%);
-//   opacity: 1;
-// }
-//
-// .sidebarSlide-leave.sidebarSlide-leave-active {
-//   transform: translateX(0%);
-//   transition: transform 300ms;
-// }
-
-.fade-enter {
+.RouterTransition-enter {
   opacity: 0;
   z-index: 1;
 }
 
-.fade-enter.fade-enter-active {
+.RouterTransition-enter.RouterTransition-enter-active {
   opacity: 1;
-  transition: opacity 250ms ease-in;
+  transition: opacity 350ms ease-in;
+}
+
+.RouterTransition-exit{
+  opacity: 0;
+}
+
+.RouterTransition-exit.RouterTransition-exit-active {
+  opacity: 0;
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  height: 1px;
 }
