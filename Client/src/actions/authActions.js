@@ -20,9 +20,9 @@ export function AUTHENTICATE_FACEBOOK(facebookToken) {
   return (dispatch) => {
     dispatch(AUTHENTICATE_PENDING());
     axios.get(`${CONFIG_ULR}/auth/facebook/token?access_token=${facebookToken}`).then(response => {
-      dispatch(AUTHENTICATE_SUCCESS(response.data));
+      dispatch(AUTHENTICATE_SUCCESS(response.data.data));
     }).catch(error => {
-      dispatch(AUTHENTICATE_ERROR(error));
+      dispatch(AUTHENTICATE_ERROR(error.message));
     });
   }
 }
@@ -48,7 +48,7 @@ export function AUTHENTICATE_PENDING() {
 }
 
 export function AUTHENTICATE_LOGOUT() {
-        localStorage.removeItem('AuthenticationToken');
+  localStorage.removeItem('AuthenticationToken');
   return {
     type: 'AUTHENTICATE_LOGOUT'
   }
