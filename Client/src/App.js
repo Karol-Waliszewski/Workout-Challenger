@@ -7,6 +7,7 @@ import SecuredRoute from './components/SecuredRoute'
 import UnauthRoute from './components/UnauthenticatedRoute'
 
 import Login from './pages/login'
+import Register from './pages/register'
 import Index from './pages/index'
 import NotFound from './pages/404'
 
@@ -18,6 +19,7 @@ class App extends Component {
       <Layout>
         <Route path="/" exact component={Index}></Route>
         <UnauthRoute path="/login" exact component={Login}></UnauthRoute>
+        <UnauthRoute path="/register" exact component={Register}></UnauthRoute>
         <SecuredRoute path="/secured" exact component={Secured}></SecuredRoute>
         <Route path="*" component={NotFound} />
     </Layout>);

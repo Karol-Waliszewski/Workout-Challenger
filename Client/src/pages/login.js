@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {AUTHENTICATE_LOCAL, AUTHENTICATE_FACEBOOK} from '../actions/authActions';
-import {FB_APP_ID} from '../keys'
+import {FB_APP_ID} from '../keys';
 
 class Login extends Component {
 

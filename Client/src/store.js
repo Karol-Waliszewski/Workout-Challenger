@@ -7,7 +7,7 @@ import thunk from 'redux-thunk'
 //import promise from 'redux-promise'
 import reducers from './reducers/reducers'
 
-const middlewares = applyMiddleware(logger,thunk);
+const middlewares = applyMiddleware(thunk,logger);
 
 let store = createStore(reducers, middlewares);
 

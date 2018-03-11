@@ -3,7 +3,9 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import {bindActionCreators} from 'redux';
 import {TOGGLE_SIDEBAR} from '../actions/sidebarActions';
+
 class Index extends Component {
+
   render() {
     return (<div className="App-intro">
       <article className="content is-p-2">
@@ -28,7 +30,7 @@ class Index extends Component {
 function mapStateToProps(state) {
   // TODO Take care of it
   return {
-    ...state
+    isAuthenticated: state.auth.isAuthenticated, token: state.auth.token
   };
 }
 

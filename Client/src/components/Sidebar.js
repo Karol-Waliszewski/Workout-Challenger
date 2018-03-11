@@ -46,7 +46,7 @@ class Sidebar extends Component {
         </p>
         <ul className="menu-list">
           <li>
-            <NavLink to="/statistics" onClick={props.closeSidebar}>General</NavLink>
+            <NavLink to="/register" onClick={props.closeSidebar}>Register</NavLink>
           </li>
           <li>
             <NavLink to="/statistics/elements" onClick={props.closeSidebar}>Elements progress</NavLink>
