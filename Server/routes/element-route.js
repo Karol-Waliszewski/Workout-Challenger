@@ -22,7 +22,7 @@ router.post('/add', Functions.validateRequest, (req, res) => {
   // Creating a element object and filling in with required data
   let freshElements = new Elements({
     author: res.locals.user._id,
-    //author: 'default',
+    //author: 'default' if elements is for everyone and visible at the start (?),
     name: req.body.name,
     description: req.body.description,
     tags: req.body.tags || []

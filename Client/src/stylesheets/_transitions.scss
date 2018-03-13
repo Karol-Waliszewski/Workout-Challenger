@@ -1,0 +1,21 @@
+.RouterTransition-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.RouterTransition-enter.RouterTransition-enter-active {
+  opacity: 1;
+  transition: opacity 350ms ease-in;
+}
+
+.RouterTransition-exit{
+  opacity: 0;
+}
+
+.RouterTransition-exit.RouterTransition-exit-active {
+  opacity: 0;
+  position: absolute;
+  top: -10px;
+  width: 1px;
+  height: 1px;
+}
