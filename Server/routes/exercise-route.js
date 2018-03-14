@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Exercises = require('../models/exercise-model');
-//const Keys = require('../config/keys');
+const _ = require('lodash/collection');
 const Functions = require('../config/functions');
 
 router.get('/get/:token', Functions.validateRequest, (req, res) => {
@@ -12,7 +12,9 @@ router.get('/get/:token', Functions.validateRequest, (req, res) => {
       author: 'default'
     }]
   }).then(results => {
-    Functions.successfulRes(res, '', results);
+    //TODO dodac sortowanie wszedzie XD
+    let sortedResults = _.orderBy(results,'name');
+    Functions.successfulRes(res, '', sortedResults);
   }).catch(err => {
     Functions.errorRes(res, [err]);
   })
