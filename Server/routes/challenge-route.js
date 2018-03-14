@@ -8,9 +8,7 @@ router.get('/get/:token', Functions.validateRequest, (req,res)=>{
   Challenges.find({
     $or: [{
       author: res.locals.user._id
-    }, {
-      author: 'default'
-    }]
+    }
   }).then(results => {
     Functions.successfulRes(res, '', results);
   }).catch(err => {
@@ -19,6 +17,7 @@ router.get('/get/:token', Functions.validateRequest, (req,res)=>{
 });
 
 router.post('/add', Functions.validateRequest, (req,res)=>{
+    //Add Validation asap
     let Challenge = new Challenges({
       author: res.locals.user._id,
       name: req.body.name,
@@ -29,7 +28,7 @@ router.post('/add', Functions.validateRequest, (req,res)=>{
     Challenge.save()
       // Sending callback
       .then(challenge => {
-        Functions.successfulRes(res, 'Challenge\' saved', challenge);
+        Functions.successfulRes(res, 'Challenge\'s saved', challenge);
       })
       .catch(err => {
         Functions.errorRes(res, [err]);
@@ -37,7 +36,10 @@ router.post('/add', Functions.validateRequest, (req,res)=>{
 });
 
 router.put('/update/:id', Functions.validateRequest, (req,res)=>{
-    Challenges.findOneAndUpdate({_id:req.params.id}, req.body, function(err, challenge) {
+    Challenges.findOneAndUpdate({
+      _id:req.params.id
+      //check if actual user
+    }, req.body, function(err, challenge) {
     if (err){
        Functions.errorRes(res, [err]);
     }
@@ -48,7 +50,10 @@ router.put('/update/:id', Functions.validateRequest, (req,res)=>{
 });
 
 router.delete('/delete/:id', Functions.validateRequest, (req,res)=>{
-    Challenges.find({_id:req.params.id}).remove((err, challenge)=>{
+    Challenges.find({
+      _id:req.params.id
+      //check if actual user
+    }).remove((err, challenge)=>{
       if(err){
         Functions.errorRes(res, [err]);
       }
