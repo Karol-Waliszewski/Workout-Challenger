@@ -9,6 +9,7 @@ import UnauthRoute from './components/UnauthenticatedRoute'
 import Login from './pages/login'
 import Register from './pages/register'
 import Index from './pages/index'
+import Exercises from './pages/exercises'
 import NotFound from './pages/404'
 
 var Secured = () => (<h1 className="title">This is secured Route hah</h1>)
@@ -21,6 +22,7 @@ class App extends Component {
         <UnauthRoute path="/login" exact component={Login}></UnauthRoute>
         <UnauthRoute path="/register" exact component={Register}></UnauthRoute>
         <SecuredRoute path="/secured" exact component={Secured}></SecuredRoute>
+        <SecuredRoute path="/exercises" exact component={Exercises}></SecuredRoute>
         <Route path="*" component={NotFound} />
     </Layout>);
   }

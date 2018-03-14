@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
-import {bindActionCreators} from 'redux';
-import {TOGGLE_SIDEBAR} from '../actions/sidebarActions';
 
 class Index extends Component {
 
@@ -35,9 +33,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    toggleSidebar: TOGGLE_SIDEBAR
-  }, dispatch);
+  return {}
 }
 
 var IndexContainer = connect(mapStateToProps, mapDispatchToProps)(Index)
