@@ -48,7 +48,8 @@ router.post('/add', Functions.validateRequest, (req, res) => {
 router.put('/update/:id', Functions.validateRequest, (req,res)=>{
   if(req.body.element){
       Elements.findOneAndUpdate({
-        _id:req.params.id
+        _id:req.params.id,
+        author: res.locals.user._id
       }, req.body.element, function(err, exercise) {
       if (err){
          Functions.errorRes(res, [err]);
@@ -64,7 +65,10 @@ router.put('/update/:id', Functions.validateRequest, (req,res)=>{
 });
 
 router.delete('/delete/:id', Functions.validateRequest, (req, res) => {
-    Elements.find({_id: req.params.id}).remove((err)=>{
+    Elements.find({
+      _id: req.params.id,
+      author: res.locals.user._id
+    }).remove((err)=>{
         if(err){
             Functions.errorRes(res, [err]);
         }

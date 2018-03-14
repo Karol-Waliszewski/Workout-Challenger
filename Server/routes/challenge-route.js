@@ -51,8 +51,8 @@ router.put('/update/:id', Functions.validateRequest, (req,res)=>{
 
 router.delete('/delete/:id', Functions.validateRequest, (req,res)=>{
     Challenges.find({
-      _id:req.params.id
-      //check if actual user
+      _id:req.params.id,
+      author: res.locals.user._id
     }).remove((err, challenge)=>{
       if(err){
         Functions.errorRes(res, [err]);
