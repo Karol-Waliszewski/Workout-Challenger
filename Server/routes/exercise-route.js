@@ -20,6 +20,22 @@ router.get('/get/:token', Functions.validateRequest, (req, res) => {
   })
 });
 
+router.get('/get/:token/:id', Functions.validateRequest, (req, res) => {
+  Exercises.findOne({
+    $or: [{
+      author: res.locals.user._id,
+      _id: req.params.id
+    }, {
+      author: 'default',
+      _id: req.params.id
+    }]
+  }).then(result => {
+    Functions.successfulRes(res, '', result);
+  }).catch(err => {
+    Functions.errorRes(res, [err]);
+  })
+});
+
 router.post('/add', Functions.validateRequest, (req, res) => {
   // Creating a exercise object and filling in with required data
   let freshExercise = new Exercises({

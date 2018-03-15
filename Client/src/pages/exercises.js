@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {EXERCISE_GET, EXERCISE_FILTER} from '../actions/exercisesActions'
+import {EXERCISE_GET, EXERCISE_FILTER, EXERCISE_RESET} from '../actions/exercisesActions'
 
 class Exercises extends Component {
 
@@ -79,9 +79,13 @@ class Exercises extends Component {
           </p>
         </div>
         <p className="panel-tabs">
-          <a className="is-active">all</a>
-          <a>public</a>
-          <a>private</a>
+          <a className="is-active" onClick={props.resetFilter}>all</a>
+          <a onClick={() => {
+              props.updateFilter(false, "private");
+            }}>public</a>
+          <a onClick={() => {
+              props.updateFilter(true, "private");
+            }}>private</a>
           <a>beginner</a>
           <a>advanced</a>
         </p>
@@ -112,6 +116,9 @@ function mapDispatchToProps(dispatch) {
         prop
       }
       dispatch(EXERCISE_FILTER(filter));
+    },
+    resetFilter: () => {
+      dispatch(EXERCISE_RESET());
     }
   }
 }

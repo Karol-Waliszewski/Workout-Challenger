@@ -9,6 +9,7 @@ export default function authReducer(state = {
         currentRoute: action.payload
       }
       break;
+
     case 'SIDEBAR_ROUTES_CHANGED':
       return {
         ...state,
