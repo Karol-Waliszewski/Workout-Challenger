@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {EXERCISE_GET, EXERCISE_FILTER, EXERCISE_RESET} from '../actions/exercisesActions'
+import {EXERCISES_GET, EXERCISE_FILTER, EXERCISE_RESET} from '../actions/exercisesActions'
 
 class Exercises extends Component {
 
@@ -104,7 +104,7 @@ function mapDispatchToProps(dispatch) {
   // TODO
   return {
     getExercises: (token) => {
-      dispatch(EXERCISE_GET(token))
+      dispatch(EXERCISES_GET(token))
     },
     deleteExercise: (id) => {
       // TODO Deleting exercises

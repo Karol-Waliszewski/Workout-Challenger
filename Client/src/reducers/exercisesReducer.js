@@ -11,7 +11,7 @@ export default function authReducer(state = {
         fetched: false
       }
       break;
-    case 'EXERCISE_SUCCESS':
+    case 'EXERCISES_SUCCESS':
       return {
         ...state,
         pending: false,
@@ -19,6 +19,23 @@ export default function authReducer(state = {
         exercises: action.payload
       }
       break;
+    case 'EXERCISE_SUCCESS':
+      return {
+        ...state,
+        pending: false,
+        fetched: true,
+        exercise: action.payload
+      }
+      break;
+    case 'EXERCISE_UPDATE':
+    let newValue = {};
+    newValue[action.payload.prop] = action.payload.value
+      return {
+        ...state,
+        fetched: false,
+        exercise: {...state.exercise,...newValue}
+      }
+      break
     case 'EXERCISE_FILTER':
       return {
         ...state,

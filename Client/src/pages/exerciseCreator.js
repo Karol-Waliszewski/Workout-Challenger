@@ -2,29 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import FontAwesomeIcon from '@fortawesome/react-fontawesome'
-import {EXERCISE_UPDATE, EXERCISE_ADD} from '../actions/exercisesActions'
-import axios from 'axios'
-import {CONFIG_ULR} from '../config'
+import {EXERCISE_UPDATE, EXERCISE_ADD, EXERCISE_GET} from '../actions/exercisesActions'
 
 class ExerciseCreator extends Component {
 
   componentWillMount() {
     if (this.props.params)
-      this.getExercises(this.props.params.id)
-  }
-
-  getExercises(id) {
-    let that = this;
-    let token = this.props.token;
-    axios.get(`${CONFIG_ULR}/exercises/get/${token}/${id}`).then(response => {
-      this.exercise = response.data.data
-      console.log(this.exercise)
-    }).catch(error => {console.log(error)})
-  }
+      this.props.getExercise(this.props.token, this.props.params.id);
+    }
 
   render() {
     let {props} = this;
-    console.log(this.exercise);
     return (<div className="has-text-centered">
       <h1>{
           props.params
@@ -32,22 +20,36 @@ class ExerciseCreator extends Component {
             : 'Creator'
         }</h1>
       {
-        props.params &&< p > Exercise id: {
-          props.params.id
-        }
-        </p>
+        props.exercise && <div>
+            <p>
+              Exercise id: {props.exercise._id}
+            </p>
+            <p>
+              Exercise name: {props.exercise.name}
+            </p>
+            <input type="text" onChange={(e) => {
+                props.updateExercise('name',e.target.value);
+              }}/>
+          </div>
       }
     </div>)
   }
 }
 
 function mapStateToProps(state) {
-  return {token: state.auth.token};
+  return {token: state.auth.token, exercise: state.exercises.exercise};
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateExercise: () => {}
+      updateExercise:(prop,value) =>{
+        dispatch(EXERCISE_UPDATE(prop,value));
+      },
+    //TODO
+    //sendExercise: (exercise)=>{dispatch(EXERCISE_SEND(exercise))},
+    getExercise: (token, id) => {
+      dispatch(EXERCISE_GET(token, id));
+    }
   }
 }
 
