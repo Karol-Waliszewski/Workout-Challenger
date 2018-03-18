@@ -1,0 +1,70 @@
+$sizeUnit: rem;
+$marginKey: 'is-m';
+$paddingKey: 'is-p';
+$separator: '-';
+$sizes: (
+    ('0', 0),
+    ('1', 0.5),
+    ('2', 1),
+    ('3', 1.5),
+    ('4', 2.5),
+    ('5', 5),
+);
+$positions: (
+    ('t', 'top'),
+    ('r', 'right'),
+    ('b', 'bottom'),
+    ('l', 'left')
+);
+
+@function sizeValue($key, $value) {
+    @return if($key == 'none', 0, $value + $sizeUnit);
+}
+
+@each $size in $sizes {
+    $sizeKey: nth($size, 1);
+    $sizeValue: nth($size, 2);
+    .#{$marginKey}#{$separator}#{$sizeKey} {
+        margin: sizeValue($sizeKey, $sizeValue) !important;
+    }
+    .#{$paddingKey}#{$separator}#{$sizeKey} {
+        padding: sizeValue($sizeKey, $sizeValue) !important;
+    }
+    .#{$marginKey}#{$separator}y#{$separator}#{$sizeKey} {
+        margin-bottom: sizeValue(bottom, $sizeValue) !important;
+        margin-top: sizeValue(top, $sizeValue) !important;
+    }
+    .#{$marginKey}#{$separator}x#{$separator}#{$sizeKey} {
+      margin-left: sizeValue(left, $sizeValue) !important;
+      margin-right: sizeValue(right, $sizeValue) !important;
+    }
+    .#{$paddingKey}#{$separator}y#{$separator}#{$sizeKey} {
+      padding-bottom: sizeValue(bottom, $sizeValue) !important;
+      padding-top: sizeValue(top, $sizeValue) !important;
+    }
+    .#{$paddingKey}#{$separator}x#{$separator}#{$sizeKey} {
+      padding-left: sizeValue(left, $sizeValue) !important;
+      padding-right: sizeValue(right, $sizeValue) !important;
+    }
+    @each $position in $positions {
+        $posKey: nth($position, 1);
+        $posValue: nth($position, 2);
+        .#{$marginKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+            margin-#{$posValue}: sizeValue($sizeKey, $sizeValue) !important;
+        }
+        .#{$paddingKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+            padding-#{$posValue}: sizeValue($sizeKey, $sizeValue) !important;
+        }
+    }
+}
+
+@each $position in $positions {
+    $posKey: nth($position, 1);
+    $posValue: nth($position, 2);
+    .#{$marginKey}#{$separator}#{$posKey}#{$separator}a {
+        margin-#{$posValue}: auto !important;
+    }
+    .#{$paddingKey}#{$separator}#{$posKey}#{$separator}a {
+        padding-#{$posValue}: auto !important;
+    }
+}
